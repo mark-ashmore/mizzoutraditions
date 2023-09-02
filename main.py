@@ -5,21 +5,20 @@ def on_a_pressed():
     """), main_character, 50, -15)
     main_character.say_text("It's 100% pulp!!", 500, False)
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
-
-def on_on_overlap(sprite, otherSprite):
-    sprites.destroy(otherSprite, effects.spray, 500)
-sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap)
-
-def on_on_overlap2(sprite2, otherSprite2):
+# Comment
+def on_on_overlap(sprite2, otherSprite2):
     game.set_game_over_effect(True, effects.clouds)
     game.game_over(True)
-sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap2)
+sprites.on_overlap(SpriteKind.player, SpriteKind.enemy, on_on_overlap)
+
+def on_on_overlap2(sprite, otherSprite):
+    sprites.destroy(otherSprite, effects.spray, 500)
+sprites.on_overlap(SpriteKind.projectile, SpriteKind.enemy, on_on_overlap2)
 
 projectile: Sprite = None
-obstacle_one: Sprite = None
 main_character: Sprite = None
 tiles.set_current_tilemap(tilemap("""
-    level1
+    ColumnLevel
 """))
 main_character = sprites.create(assets.image("""
     girl_forward
